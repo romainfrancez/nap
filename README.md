@@ -1,2 +1,2 @@
-nap [![Code Climate](https://codeclimate.com/repos/5300f00de30ba068ee037776/badges/5d26b2d92f1b7c60683a/gpa.png)](https://codeclimate.com/repos/5300f00de30ba068ee037776/feed)
+nap [![Build Status](https://travis-ci.org/romainfrancez/nap.png?branch=master)](https://travis-ci.org/romainfrancez/nap) [![Code Climate](https://codeclimate.com/repos/5300f00de30ba068ee037776/badges/5d26b2d92f1b7c60683a/gpa.png)](https://codeclimate.com/repos/5300f00de30ba068ee037776/feed)
 ===
