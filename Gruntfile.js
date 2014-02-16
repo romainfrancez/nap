@@ -55,7 +55,8 @@
         }
       },
       exec: {
-        test: 'npm test'
+        test: 'node_modules/.bin/jasmine-node ' +
+              '--verbose --captureExceptions spec'
       }
     });
 
