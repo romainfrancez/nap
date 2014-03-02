@@ -26,9 +26,60 @@
     Manifest = require('../lib/Manifest.js');
 
   describe('Manifest', function () {
+    var createManifest;
+
+    createManifest = function () {
+      var
+        manifest = new Manifest(),
+        vars = {};
+
+      vars.name = 'nap';
+      vars.version = '0.1.0';
+      vars.date = new Date();
+      vars.directory = __dirname;
+      vars.user = 'nap';
+      vars.group = 'apps';
+      vars.startScript = 'npm start';
+      vars.description = '';
+
+      manifest.vars = vars;
+
+      return manifest;
+    };
+
     it('should get the manifest template', function () {
-      var manifest = new Manifest();
+      var manifest = createManifest();
       expect(manifest.getTemplate()).toEqual(jasmine.any(String));
+    });
+
+    it('should render the filename', function () {
+      var manifest = createManifest();
+      expect(manifest.renderFilename()).toEqual('nap-manifest.xml');
+    });
+
+    it('should render the manifest', function () {
+      var
+        manifest = createManifest(),
+        vars = manifest.vars;
+
+      manifest.getTemplate = function () {
+        return '{{name}}{{version}}{{date}}{{directory}}{{user}}{{group}}' +
+          '{{startScript}}{{description}}';
+      };
+
+      expect(manifest.render()).toEqual(vars.name + vars.version +
+        vars.date + vars.directory.replace(/\//g, '&#x2F;') + vars.user +
+        vars.group + vars.startScript + vars.description);
+    });
+
+    it('should write the manifest to disk', function () {
+      var
+        fs = require('fs'),
+        manifest = createManifest();
+
+      manifest.write('/tmp/');
+
+      expect(fs.existsSync('/tmp/nap-manifest.xml')).toEqual(true);
     });
   });
 }());
